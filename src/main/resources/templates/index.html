@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>Title</title>
+
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.js"
+            integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+            crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified CSS & JS -->
+    <link rel="stylesheet" media="screen" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="jumbotron">
+    <div class="container">
+        <h1>Mongo Example</h1>
+        <p>See how easy it is to use MongoDB with Spring Boot</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <form th:action="@{/}" method="post" role="form">
+                <legend>Enter Restaurant Info</legend>
+
+                <div class="form-group">
+                    <label for="name">Restaurant</label>
+                    <input type="text" class="form-control" name="name" id="name" placeholder="Bob's Burgers"></input>
+                </div>
+
+                <div class="form-group">
+                    <label for="employees">Employee Information</label>
+                    <textarea name="employees" id="employees" class="form-control" rows="10"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div th:each="restaurant : ${allRestaurants}">
+                <h3 th:text="${restaurant.name}"></h3>
+
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Position</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="employee : ${restaurant.employees}">
+                        <td th:text="${employee.name}"></td>
+                        <td th:text="${employee.position}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
